@@ -101,69 +101,99 @@ const App = () => {
       <Background />
       <div className="relative z-10 container mx-auto px-4 py-8 md:py-12">
         
-        {/* Header */}
-        <header className="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-16 gap-6">
-          <div className="flex items-center gap-5 group cursor-default">
-            <div className="w-16 h-16 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-yellow-400 shadow-[0_0_20px_rgba(251,191,36,0.5)] floating bg-red-800 relative z-10">
+        {/* Header matching the image style */}
+        <header className="flex flex-col md:flex-row items-center justify-between mb-12 md:mb-16 gap-6">
+          <div className="flex items-center gap-4">
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-[3px] border-yellow-300 shadow-[0_0_25px_rgba(253,224,71,0.6)] bg-white relative z-10 flex-shrink-0">
                 <img src="https://res.cloudinary.com/dbyap7mw2/image/upload/v1769950832/457203768_122098176248501397_7041672154476517727_n_1_ib8kcf.jpg" alt="Logo" className="w-full h-full object-cover" />
             </div>
-            <div>
-              <h1 className="text-4xl md:text-6xl font-header font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-100 to-yellow-300 text-glow drop-shadow-md tracking-tight">A1K50</h1>
-              <p className="text-lg md:text-xl font-tet text-yellow-400 tracking-wider mt-1">🌸  Chúc Mừng Năm Mới 2026 🌸</p>
+            <div className="flex flex-col">
+              <h1 className="text-5xl md:text-6xl font-header font-bold text-yellow-200 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-tight" style={{ textShadow: '0 0 10px #b45309' }}>A1K50</h1>
+              <div className="flex items-center gap-2 text-pink-300">
+                  <span className="text-xl">🌸</span>
+                  <p className="text-xl md:text-2xl font-tet text-yellow-100 tracking-wider drop-shadow-md">Chúc Mừng Năm Mới 2026</p>
+                  <span className="text-xl">🌸</span>
+              </div>
             </div>
+          </div>
+          
+          <div className="flex flex-col items-center md:items-end">
+             <div className="hidden md:block text-right">
+                <div className="text-yellow-500/80 text-xs font-bold uppercase tracking-[0.2em] mb-1">Hotline Đặt Hàng</div>
+                <div className="text-2xl font-bold text-yellow-400 font-mono">0123.456.789</div>
+             </div>
           </div>
         </header>
 
         {/* Store View */}
         <div className="space-y-8 animate-[fadeIn_0.5s_ease-out]">
             
-            <div className="text-center mb-12">
-                <h2 className="text-2xl md:text-3xl font-header text-yellow-200 mb-2">Sản Phẩm Tết 2026</h2>
-                <div className="h-1 w-24 bg-yellow-500 mx-auto rounded-full opacity-60"></div>
+            {/* Center Tet Decor */}
+            <div className="flex justify-center mb-10 relative">
+                 <div className="text-center">
+                    <div className="inline-block relative">
+                         <h2 className="text-[5rem] md:text-[8rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-red-500 to-red-800 drop-shadow-[0_4px_0_#fff] leading-none font-sans" style={{WebkitTextStroke: '2px #ffd700'}}>TẾT</h2>
+                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border-4 border-yellow-500/30 rotate-45 rounded-lg -z-10 bg-red-900/20 backdrop-blur-sm"></div>
+                    </div>
+                    <div className="flex justify-center gap-4 mt-2 font-tet text-yellow-200 text-xl">
+                        <span>happy</span><span>•</span><span>new</span><span>•</span><span>year</span>
+                    </div>
+                 </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 px-2 md:px-0">
               {loading ? (
                 <div className="col-span-full text-center py-32">
                     <div className="floating text-7xl mb-6">🧧</div>
                     <p className="text-yellow-200 text-lg animate-pulse">Đang tải cửa hàng...</p>
                 </div>
               ) : products.length === 0 ? (
-                  <div className="col-span-full text-center py-20 bg-red-950/20 rounded-3xl border border-yellow-500/10">
+                  <div className="col-span-full text-center py-20 bg-red-950/40 rounded-3xl border border-yellow-500/20 backdrop-blur-sm">
                       <p className="text-yellow-500/50 text-xl italic mb-4">Cửa hàng đang cập nhật sản phẩm.</p>
                   </div>
               ) : (
                 products.map((product) => (
-                  <div key={product.id} onClick={() => setSelectedProduct(product)} className="glass-panel rounded-2xl overflow-hidden group cursor-pointer hover:-translate-y-2 transition-all duration-300 hover:shadow-[0_10px_40px_rgba(251,191,36,0.15)] border border-yellow-500/10 hover:border-yellow-400/50 flex flex-col h-full bg-[#2a0a0a]">
-                    <div className="aspect-[4/3] relative overflow-hidden bg-white/5 p-4 flex items-center justify-center">
-                      <img src={product.imageUrl} alt={product.name} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-lg"/>
-                      
-                      {/* Rating Badge */}
-                      <div className="absolute top-3 right-3 bg-black/60 backdrop-blur rounded-full px-2.5 py-1 flex items-center gap-1 text-xs font-bold border border-yellow-500/30 shadow-lg">
-                           <span className="text-yellow-400">★</span> 
-                           <span className="text-yellow-100">{product.ratingCount > 0 ? (product.ratingTotal / product.ratingCount).toFixed(1) : '5.0'}</span>
-                      </div>
-                      
-                      {/* Decorative Tag */}
-                      <div className="absolute top-3 left-3">
-                          <span className="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider shadow-md">Hot</span>
-                      </div>
-                    </div>
-                    
-                    <div className="p-5 flex flex-col flex-1 relative">
-                      <div className="absolute -top-8 right-4 text-3xl group-hover:animate-bounce drop-shadow-lg transition-all opacity-0 group-hover:opacity-100">🧧</div>
-                      
-                      <h3 className="font-bold text-lg mb-2 line-clamp-2 text-yellow-50 font-header leading-tight min-h-[3rem]">{product.name}</h3>
-                      
-                      <div className="mt-auto pt-4 border-t border-yellow-500/10 flex justify-between items-end">
-                        <div className="flex flex-col">
-                            <span className="text-xs text-yellow-500/60 line-through">{(product.price * 1.2).toLocaleString()}đ</span>
-                            <span className="font-bold text-xl text-yellow-400 text-glow">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)}</span>
+                  <div key={product.id} onClick={() => setSelectedProduct(product)} className="group cursor-pointer hover:-translate-y-2 transition-all duration-300">
+                    {/* Card container matching the image: Dark red background, not glass */}
+                    <div className="bg-[#3e0e0e] rounded-xl overflow-hidden shadow-[0_8px_20px_rgba(0,0,0,0.6)] border border-[#5c1c1c] hover:border-yellow-500/50 hover:shadow-[0_10px_30px_rgba(234,179,8,0.2)] flex flex-col h-full relative">
+                        
+                        {/* Image Area - Square Aspect */}
+                        <div className="aspect-square relative overflow-hidden bg-black/20">
+                          <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+                          
+                          {/* Rating Badge - Brown pill style */}
+                          <div className="absolute top-3 right-3 bg-[#6b3519] text-white text-[11px] font-bold px-2 py-0.5 rounded shadow-sm border border-white/10 flex items-center gap-1">
+                               <i className="fas fa-star text-yellow-400 text-[9px]"></i>
+                               <span>{product.ratingCount > 0 ? (product.ratingTotal / product.ratingCount).toFixed(1) : '5.0'}</span>
+                          </div>
+                          
+                          {/* Pink Stamp - Bottom Right */}
+                          <div className="absolute bottom-3 right-3 w-6 h-6 bg-[#ff3366] rounded-sm flex items-center justify-center shadow-lg transform rotate-3">
+                               <span className="text-white text-[10px] font-serif font-bold">福</span>
+                          </div>
                         </div>
-                        <button className="w-10 h-10 rounded-full bg-yellow-500 text-red-900 flex items-center justify-center hover:bg-yellow-400 transition-all shadow-lg hover:shadow-yellow-500/50 hover:scale-110 active:scale-90">
-                            <i className="fas fa-cart-plus"></i>
-                        </button>
-                      </div>
+                        
+                        {/* Content Area - Dark Red */}
+                        <div className="p-4 flex flex-col flex-1 relative bg-gradient-to-b from-[#3e0e0e] to-[#2a0808]">
+                          {/* Title - White, Uppercase, Serif-like */}
+                          <h3 className="text-white font-bold text-sm uppercase mb-3 line-clamp-2 leading-relaxed tracking-wide font-header h-10">
+                            {product.name}
+                          </h3>
+                          
+                          <div className="mt-auto pt-2 flex justify-between items-end border-t border-white/5">
+                             {/* Price - Yellow */}
+                             <div className="flex flex-col">
+                                <span className="text-yellow-400 font-bold text-lg font-sans">
+                                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price).replace('₫', 'đ')}
+                                </span>
+                             </div>
+
+                             {/* Cart Button - Circle Yellowish/Brown */}
+                             <button className="w-8 h-8 rounded-full bg-[#8c6a28] hover:bg-[#a67c2e] flex items-center justify-center transition-colors shadow-md border border-yellow-500/30 group-active:scale-95">
+                                 <i className="fas fa-shopping-cart text-white text-xs"></i>
+                             </button>
+                          </div>
+                        </div>
                     </div>
                   </div>
                 ))
@@ -172,6 +202,11 @@ const App = () => {
         </div>
       </div>
       
+      {/* Footer */}
+      <footer className="relative z-10 py-8 text-center text-yellow-500/20 text-xs border-t border-yellow-900/30 mt-12 bg-black/40 backdrop-blur-md">
+          <p>© 2026 A1K50 Store. All rights reserved.</p>
+          <p className="mt-1">Chúc Mừng Năm Mới - An Khang Thịnh Vượng</p>
+      </footer>
       
       {selectedProduct && <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} onRate={handleRateProduct} userRating={selectedProduct.ratedBy ? selectedProduct.ratedBy[userUUID] : 0} onOrder={() => setIsOrderModalOpen(true)} />}
       {isOrderModalOpen && selectedProduct && <OrderModal product={selectedProduct} onClose={() => setIsOrderModalOpen(false)} onSubmit={handlePlaceOrder} isSubmitting={isOrdering} />}
